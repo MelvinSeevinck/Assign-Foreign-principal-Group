@@ -1,0 +1,17 @@
+$Sub1 = "<Subscription ID 1>"
+$Sub2 = "<Subscription ID 2>"
+$Sub3 = "<Subscription ID 3>"
+$role = "Owner"
+$subscriptionid =$Sub1,$Sub2,$Sub3
+$ObjectID1 = "<Object ID 1>"
+$ObjectID2 = "<Object ID 2>"
+$ObjectID3 = "<Object ID 3>"
+$ObjectID4 = "<Object ID 4>"
+$ObjectIDs = $ObjectID1,$ObjectID2,$ObjectID3,$ObjectID4
+$tenantID = "<Tenant ID>"
+Login-azAccount -TenantId $tenantID
+forEach ($GroupID in $ObjectIDs)
+{
+Foreach ($i in $subscriptionid)
+{ New-AzRoleAssignment -ObjectType ForeignGroup -ObjectId $GroupID -RoleDefinitionName $role -Scope /subscriptions/$i}
+}
