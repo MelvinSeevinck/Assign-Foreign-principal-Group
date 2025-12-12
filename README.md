@@ -51,3 +51,28 @@ Voor CSP-partners is het essentieel om te zorgen dat de Admin Agent en/of Helpde
 Het verbruik correct wordt geregistreerd als Managed Resources.
 De partner een gezonde marge behoudt en niet onnodig omzet verliest.
 Er volledig inzicht is in het verbruik van de klant, wat helpt bij het optimaliseren van licenties en diensten.
+
+## Clean up every Azure resource at once (Cloud Shell)
+
+Use the `Cleanup-All-AzureResources.ps1` script in Azure Cloud Shell to safely—yet thoroughly—remove every resource in all (or
+selected) subscriptions.
+
+### Important
+
+- This script removes **everything** (resource locks, resource groups, and stand-alone resources). Use it only when you are
+  sure nothing needs to be retained.
+- A confirmation prompt appears by default; use `-Force` to skip it and `-WhatIf` to preview the actions without deleting
+  anything.
+
+### Examples
+
+```powershell
+# Delete all resources in every subscription of your tenant (with confirmation)
+./Cleanup-All-AzureResources.ps1 -TenantId <tenantId>
+
+# Delete only the specified subscriptions without an extra prompt
+./Cleanup-All-AzureResources.ps1 -SubscriptionId <subId1>,<subId2> -Force
+
+# Preview what would be deleted without removing anything
+./Cleanup-All-AzureResources.ps1 -WhatIf
+```
